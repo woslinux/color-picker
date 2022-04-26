@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="color_picker.js"></script>
+    <script defer type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          document.body.style.backgroundColor = colorPicker('random.jpeg', {colors: 2})[0];
+          document.body.children[1].style.color = colorPicker('random.jpeg', {colors: 2})[1];
+        }, 100);
+      });
+    </script>
+    <style type="text/css">
+      img {
+        position: absolute;
+        left: 25%;
+        top: 25%;
+        width: 50%;
+        height: 50%;
+        border-radius: 1rem;
+        object-fit: cover;
+      }
+      p {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 75%;
+        font-size: 24px;
+        text-align: center;
+        font-family: sans-serif;
+        text-shadow: 0 4px 20px rgba(255,255,255,0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <img src="random.jpeg">
+    <p>Mort's Color Picker</p>
+  </body>
+</html>
