@@ -8,12 +8,15 @@
     <script defer type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
-          document.body.style.backgroundColor = colorPicker('random.jpeg', {colors: 2})[0];
-          document.body.children[1].style.color = colorPicker('random.jpeg', {colors: 2})[1];
+          document.body.style.background = colorPicker('random.jpeg', {colors: 2, linearGradient: 'to top'});
+          document.body.children[1].style.color = colorPicker('random.jpeg')[0];
         }, 100);
       });
     </script>
     <style type="text/css">
+      html {
+        min-height: 100vh;
+      }
       img {
         position: absolute;
         left: 25%;
