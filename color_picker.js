@@ -1,29 +1,43 @@
 
 function colorPicker(url, _config = {}) {
-  // vars
+  // XXX: This canvas is needed to do what we need.
   var canvas = document.createElement('canvas');
 
+  // XXX: We have to temproraily save the colors in a value since
+  // we can't return them straightaway from useCanvas()'s callback.
+  var color = [];
+
   useCanvas(canvas, url, function() {
-      window._returnPickedColor = [];
       for (var i = 0; i <= (_config.colors || 1); i++) {
-        // get image data
+        // XXX: Here we get the image's data from each seperated part.
         var p = canvas.getContext('2d').getImageData(i, i, (_config.colors || 1), (_config.colors || 1)).data;
-        // save color
-        window._returnPickedColor[i] = 'rgba(' + p[0] + ', ' + p[1] + ', ' + p[2] + ', ' + (_config.opacity || 1) + ')';
+
+        // XXX: Here we multiply the color value with the brightness you
+        // specified to change it's brightness.
+        var r = p[0] * (_config.brightness || 1);
+        var g = p[1] * (_config.brightness || 1);
+        var b = p[2] * (_config.brightness || 1);
+
+        // XXX: And we get the color values and turn them to rgba CSS values
+        // with optional opacity.
+        color[i] = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + (_config.opacity || 1) + ')';
       }
     });
 
-  // canvas function
   function useCanvas(element, imageUrl, callback) {
+    // XXX: We create a new 'img' to draw and load the image.
     var image = new Image();
     image.src = imageUrl;
-    element.width = image.width; // img width
-    element.height = image.height; // img height
-    // draw image in canvas tag
-    element.getContext('2d')
-    .drawImage(image, 0, 0, (_config.colors || 1), (_config.colors || 1));
+
+    // XXX: The image has to be the same width and height as it's resolution.
+    element.width = image.width;
+    element.height = image.height;
+
+    // XXX: And finally. We draw the image to our canvas...
+    element.getContext('2d').drawImage(image, 0, 0, (_config.colors || 1), (_config.colors || 1));
     return callback();
   }
 
-  return window._returnPickedColor;
+  // XXX: And there you get the array of the colors in the image.
+  return color;
 }
