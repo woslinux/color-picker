@@ -3,14 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Color Picker's Demo Page</title>
     <script type="text/javascript" src="color_picker.js"></script>
     <script defer type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-          document.body.style.background = colorPicker('random.jpeg', {colors: 2, linearGradient: 'to top'});
-          document.body.children[1].style.color = colorPicker('random.jpeg')[0];
-        }, 100);
+        document.body.style.background = colorPicker('random.jpeg', {colors: 2, linearGradient: 'to top'});
+        document.body.children[1].style.color = colorPicker('random.jpeg')[0];
       });
     </script>
     <style type="text/css">

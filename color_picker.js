@@ -1,5 +1,6 @@
+'use strict';
 
-function colorPicker(url, _config = {}) {
+function colorPicker(url, _config = {}, callback) {
   // XXX: This canvas is needed to do what we need.
   var canvas = document.createElement('canvas');
 
@@ -40,8 +41,8 @@ function colorPicker(url, _config = {}) {
 
   // XXX: And there you get the array of the colors in the image.
   if (_config.linearGradient !== undefined) {
-    return 'linear-gradient(' + _config.linearGradient + ', ' + colors + ')';
+    callback('linear-gradient(' + _config.linearGradient + ', ' + colors + ')');
   } else {
-    return colors;
+    callback(colors);
   }
 }
